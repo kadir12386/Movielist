@@ -1,10 +1,54 @@
-.App {
-  font-family: sans-serif;
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 .profile-pic {
   height: 200px;
   width: 200px;
   border-radius: 50%;
   object-fit: cover;
+}
+.movie-poster {
+  width: 345px;
+  height: 500px;
+  object-fit: cover;
+}
+.movie-info-conatiner {
+  margin: 0px 0px;
+  padding: 10px 0px;
+}
+.movie-specs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.movie-name {
+  font-size: 24px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 600;
+  color: rgb(3, 97, 185);
+  margin: 10px 0px;
+}
+.movie-container {
+  width: 345px;
+  margin: 20px;
+  border-radius: 20px;
+  overflow: hidden;
+  /* border: 2px solid red; */
+}
+.movie-rating {
+  font-size: 18px;
+  color: rgb(245, 45, 10);
+  font-weight: 600;
+}
+.movie-summary {
+  color: rgb(68, 67, 67);
+}
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
