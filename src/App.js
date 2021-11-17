@@ -44,14 +44,14 @@ export default function App() {
   );
 }
 
-function Msg({ name, pic }) {
-  return (
-    <div>
-      <img className="profile-pic" src={pic} alt={name} />
-      <h1>{name}</h1>
-    </div>
-  );
-}
+// function Msg({ name, pic }) {
+//   return (
+//     <div>
+//       <img className="profile-pic" src={pic} alt={name} />
+//       <h1>{name}</h1>
+//     </div>
+//   );
+// }
 function Movie({ name, poster, rating, des }) {
   return (
     <div className="movie-container">
@@ -69,6 +69,32 @@ function Movie({ name, poster, rating, des }) {
 
         <p className="movie-summary">{des}</p>
       </div>
+      <Counter />
+    </div>
+  );
+}
+function Counter() {
+  const [like, setLike] = useState(0);
+  const [dislike, setDisLike] = useState(0);
+  // const like = 0;
+  return (
+    // <div>
+    //   <button onClick={() => setLike(like+1)}>Like</button>
+    //   <p>{like}</p>
+    // </div>
+    <div className="counter-container">
+      <button onClick={() => setLike(like + 1)}>
+        <span role="img" aria-label="like">
+          👍
+        </span>{" "}
+        {like}
+      </button>
+      <button onClick={() => setDisLike(dislike + 1)}>
+        <span role="img" aria-label="like">
+          👎
+        </span>{" "}
+        {dislike}
+      </button>
     </div>
   );
 }
