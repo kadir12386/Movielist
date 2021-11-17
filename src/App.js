@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.css";
 
 export default function App() {
@@ -68,8 +69,8 @@ function Movie({ name, poster, rating, des }) {
         </div>
 
         <p className="movie-summary">{des}</p>
+        <Counter />
       </div>
-      <Counter />
     </div>
   );
 }
