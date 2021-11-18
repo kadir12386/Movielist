@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
-
+import { MovieList } from "./MovieList";
+import Button from "@mui/material/Button";
 export default function App() {
   const movie = [
     {
@@ -27,75 +28,102 @@ export default function App() {
         " M S Dhoni, a boy from Ranchi, aspires to play cricket for India. Though he initially tries to please his father by working for the Indian Railways, he ultimately decides to chase his dreams.",
     },
   ];
+  const [initalmovie, setMovie] = useState(movie);
+  const [name, setName] = useState("");
+  const [poster, setPoster] = useState("");
+  const [summary, setSummary] = useState("");
+  const [rating, setRating] = useState("");
+
+  const resetMovieForm = () => {
+    setName("");
+    setPoster("");
+    setSummary("");
+    setRating("");
+  };
+
+  const addMoive = () => {
+    console.log(name, poster, summary, rating);
+    console.log({ name, poster, summary, rating });
+    const newmovie = {
+      name,
+      poster,
+      summary,
+      rating,
+    };
+
+    setMovie([...initalmovie, newmovie]);
+    // console.log([...initalmovie, newmovie]);
+    resetMovieForm();
+  };
   return (
     <div className="App">
-      {/* {movie.map((el) => (
-        <Movie
-          name={el.name}
-          poster={el.poster}
-          rating={el.rating}
-          des={el.summary}
-        /> */}
-      <section className="movie-list">
-        {movie.map(({ name, poster, rating, summary }) => (
-          <Movie name={name} poster={poster} rating={rating} des={summary} />
-        ))}
-      </section>
+      <input
+        value={name}
+        placeholder="Movie name"
+        onChange={(event) => setName(event.target.value)}
+      />
+      <input
+        value={poster}
+        placeholder="Movie Poster"
+        onChange={(event) => setPoster(event.target.value)}
+      />
+      <input
+        value={summary}
+        placeholder="Movie summary"
+        onChange={(event) => setSummary(event.target.value)}
+      />
+      <input
+        value={rating}
+        placeholder="Movie rating"
+        onChange={(event) => setRating(event.target.value)}
+      />
+      <Button variant="contained" onClick={addMoive}>
+        Add Movie
+      </Button>
+      {/* <button onClick={addMoive}>Add Movie</button> */}
+      {/* <AddColorBox /> */}
+      {/* important */}
+      <MovieList movie={initalmovie} />
     </div>
   );
 }
 
-// function Msg({ name, pic }) {
+//color on text and color on inputBox.....
+// function AddColorBox() {
+//   const colors = ["red", "green", "pink"];
+//   const [addcolor, setAddColor] = useState(colors);
+//   const [color, setColor] = useState("");
+//   const styles = { background: color };
+//   const styles_text = { color: color };
+
 //   return (
 //     <div>
-//       <img className="profile-pic" src={pic} alt={name} />
-//       <h1>{name}</h1>
+//       <input
+//         className="color_box"
+//         style={styles}
+//         placeholder="Enter the color"
+//         onChange={(event) => setColor(event.target.value)}
+//       />
+//       <button onClick={() => setAddColor([...addcolor, color])}>
+//         Add Color
+//       </button>
+//       <p className="color_box_text" style={styles_text}>
+//         {color}
+//       </p>
+
+//       {addcolor.map((el) => (
+//         <ColorBox color={el} />
+//       ))}
 //     </div>
 //   );
 // }
-function Movie({ name, poster, rating, des }) {
-  return (
-    <div className="movie-container">
-      <img className="movie-poster" src={poster} alt={name} />
-      <div className="movie-info-conatiner">
-        <div className="movie-specs">
-          <h3 className="movie-name">{name}</h3>
-          <p className="movie-rating">
-            <span role="img" aria-label="star">
-              ⭐
-            </span>{" "}
-            {rating}
-          </p>
-        </div>
 
-        <p className="movie-summary">{des}</p>
-        <Counter />
-      </div>
-    </div>
-  );
-}
-function Counter() {
-  const [like, setLike] = useState(0);
-  const [dislike, setDisLike] = useState(0);
-  // const like = 0;
-  return (
-    // <div>
-    //   <button onClick={() => setLike(like+1)}>Like</button>
-    //   <p>{like}</p>
-    // </div>
-    <div className="counter-container">
-      <button onClick={() => setLike(like + 1)}>
-        <span role="img" aria-label="like">
-          👍
-        </span>{" "}
-        {like}
-      </button>
-      <button onClick={() => setDisLike(dislike + 1)}>
-        <span role="img" aria-label="like">
-          👎
-        </span>{" "}
-        {dislike}
-      </button>
-    </div>
-  );
-}
+// function ColorBox({ color }) {
+//   const styles = {
+//     background: color,
+//     height: "120px",
+//     width: "200px",
+//     marginBottom: "10px",
+//   };
+//   return <div style={styles}></div>;
+// }
