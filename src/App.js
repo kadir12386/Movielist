@@ -1,34 +1,16 @@
 import { useState } from "react";
+import { useParams } from "react-router";
 import "./App.css";
 import { MovieList } from "./MovieList";
+import { INITAIL_MOVIES } from "./INITAIL_MOVIES";
+import { AddColorBox } from "./AddColorBox";
+import TextField from "@mui/material/TextField";
+import { Link, Switch, Route, Redirect } from "react-router-dom";
+
+// Material import
 import Button from "@mui/material/Button";
 export default function App() {
-  const movie = [
-    {
-      name: "Avengers: Endgame",
-      poster:
-        "https://images.moviesanywhere.com/4677177f6f0595289bc3e767e7b47459/1d6c6c73-ab1e-4453-969c-6a4e965ebb37.jpg",
-      rating: 8.4,
-      summary:
-        " After Thanos, an intergalactic warlord, disintegrates half of the universe, the Avengers must reunite and assemble again to reinvigorate their trounced allies and restore balance.",
-    },
-    {
-      name: "Life Of Pi",
-      poster: "https://flxt.tmsimg.com/assets/p9227710_p_v10_ai.jpg",
-      rating: 9,
-      summary:
-        " Pi Patel finds a way to survive in a lifeboat that is adrift in the middle of nowhere. His fight against the odds is heightened by the company of a hyena and a male Bengal tiger.",
-    },
-    {
-      name: "M.S. Dhoni",
-      poster:
-        "https://m.media-amazon.com/images/M/MV5BZjAzZjZiMmQtMDZmOC00NjVmLTkyNTItOGI2Mzg4NTBhZTA1XkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_.jpg",
-      rating: 10,
-      summary:
-        " M S Dhoni, a boy from Ranchi, aspires to play cricket for India. Though he initially tries to please his father by working for the Indian Railways, he ultimately decides to chase his dreams.",
-    },
-  ];
-  const [initalmovie, setMovie] = useState(movie);
+  const [initalmovie, setMovie] = useState(INITAIL_MOVIES);
   const [name, setName] = useState("");
   const [poster, setPoster] = useState("");
   const [summary, setSummary] = useState("");
@@ -56,74 +38,132 @@ export default function App() {
     resetMovieForm();
   };
   return (
-    <div className="App">
-      <input
-        value={name}
-        placeholder="Movie name"
-        onChange={(event) => setName(event.target.value)}
+    <section>
+      {/* Header */}
+      <ul>
+        <li>
+          <Link to="/"> Home</Link>
+          <Link to="/movies"> Movies</Link>
+          <Link to="/color"> Color-Games</Link>
+        </li>
+      </ul>
+
+      <Switch>
+        <Route exact path="/">
+          {" "}
+          Welcome
+        </Route>
+        <Route path="/films">
+          <Redirect to="/movies" />
+        </Route>
+        <Route path="/movies/:id">
+          <MovieDetails movie={initalmovie} />
+        </Route>
+        <Route path="/abc">
+          <Redirect to="/movies" />
+        </Route>
+
+        <Route path="/movies">
+          {" "}
+          <div className="App">
+            <div className="add-movie-form">
+              <TextField
+                id="outlined-basic"
+                label="Movie name"
+                variant="outlined"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+              />
+              <TextField
+                id="outlined-basic"
+                label="Movie Poster"
+                variant="outlined"
+                value={poster}
+                onChange={(event) => setPoster(event.target.value)}
+              />
+              <TextField
+                id="outlined-basic"
+                label="Movie summary"
+                variant="outlined"
+                value={summary}
+                onChange={(event) => setSummary(event.target.value)}
+              />
+
+              <TextField
+                id="outlined-basic"
+                label="Movie summary"
+                variant="outlined"
+                value={rating}
+                onChange={(event) => setRating(event.target.value)}
+              />
+
+              <Button variant="contained" onClick={addMoive}>
+                Add Movie
+              </Button>
+            </div>
+
+            {/* <button onClick={addMoive}>Add Movie</button> */}
+            {/* <AddColorBox /> */}
+
+            {/* important */}
+            <MovieList movie={initalmovie} />
+          </div>
+        </Route>
+        <Route path="/color">
+          <AddColorBox />
+        </Route>
+        <Route path="**">
+          {" "}
+          <NotFound />
+        </Route>
+      </Switch>
+    </section>
+  );
+}
+
+function NotFound() {
+  const style = { width: "100%", height: "600px", objectFit: "cover" };
+  return (
+    <div>
+      <img
+        style={style}
+        src="https://flothemes.com/wp-content/uploads/2017/06/best-404-page-design5.png"
+        alt="NotFound"
       />
-      <input
-        value={poster}
-        placeholder="Movie Poster"
-        onChange={(event) => setPoster(event.target.value)}
-      />
-      <input
-        value={summary}
-        placeholder="Movie summary"
-        onChange={(event) => setSummary(event.target.value)}
-      />
-      <input
-        value={rating}
-        placeholder="Movie rating"
-        onChange={(event) => setRating(event.target.value)}
-      />
-      <Button variant="contained" onClick={addMoive}>
-        Add Movie
-      </Button>
-      {/* <button onClick={addMoive}>Add Movie</button> */}
-      {/* <AddColorBox /> */}
-      {/* important */}
-      <MovieList movie={initalmovie} />
     </div>
   );
 }
 
-//color on text and color on inputBox.....
-// function AddColorBox() {
-//   const colors = ["red", "green", "pink"];
-//   const [addcolor, setAddColor] = useState(colors);
-//   const [color, setColor] = useState("");
-//   const styles = { background: color };
-//   const styles_text = { color: color };
+function MovieDetails({ movie }) {
+  const { id } = useParams();
+  console.log(movie);
+  const ini_movie = movie[id];
+  console.log(ini_movie);
+  return (
+    <div>
+      <h1>Movie Details {id}</h1>
+      <div className="movie-info-conatiner">
+        <iframe
+          width="100%"
+          height="400"
+          src={ini_movie.trailer}
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+        <div className="movie-specs">
+          <h3 className="movie-name">{ini_movie.name}</h3>
 
-//   return (
-//     <div>
-//       <input
-//         className="color_box"
-//         style={styles}
-//         placeholder="Enter the color"
-//         onChange={(event) => setColor(event.target.value)}
-//       />
-//       <button onClick={() => setAddColor([...addcolor, color])}>
-//         Add Color
-//       </button>
-//       <p className="color_box_text" style={styles_text}>
-//         {color}
-//       </p>
-
-//       {addcolor.map((el) => (
-//         <ColorBox color={el} />
-//       ))}
-//     </div>
-//   );
-// }
-
-// function ColorBox({ color }) {
-//   const styles = {
-//     background: color,
-//     height: "120px",
-//     width: "200px",
-//     marginBottom: "10px",
-//   };
-//   return <div style={styles}></div>;
-// }
+          <p className="movie-rating">
+            <span role="img" aria-label="star">
+              ⭐
+            </span>{" "}
+            {ini_movie.rating}
+          </p>
+        </div>
+        <p className="">{ini_movie.summary}</p>
+      </div>
+    </div>
+  );
+}

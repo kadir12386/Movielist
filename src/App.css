@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700;900&display=swap");
 
-* {
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+} */
 .profile-pic {
   height: 200px;
   width: 200px;
@@ -69,4 +69,10 @@
 .color_box_text {
   color: blue;
   font-size: 20px;
+}
+
+.add-movie-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }

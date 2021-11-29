@@ -1,6 +1,10 @@
 import { useState } from "react";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
+
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+// import IconButton from "@mui/material/IconButton";
+// import DeleteIcon from "@mui/icons-material/Delete";
+import Badge from "@mui/material/Badge";
 
 export function Counter() {
   const [like, setLike] = useState(0);
@@ -14,10 +18,28 @@ export function Counter() {
     //   <p>{like}</p>
     // </div>
     <div className="counter-container">
-      <IconButton aria-label="delete">
+      {/* <IconButton aria-label="delete">
         <DeleteIcon />
-      </IconButton>
-      <button onClick={incrementLike}>
+      </IconButton> */}
+
+      <Badge
+        badgeContent={like}
+        color="primary"
+        aria-label="like"
+        onClick={incrementLike}
+      >
+        <ThumbUpIcon color="action" />
+      </Badge>
+
+      <Badge
+        badgeContent={dislike}
+        color="error"
+        aria-label="dislike"
+        onClick={incrementDislike}
+      >
+        <ThumbDownIcon color="action" />
+      </Badge>
+      {/* <button>
         <span role="img" aria-label="like">
           👍
         </span>{" "}
@@ -28,7 +50,7 @@ export function Counter() {
           👎
         </span>{" "}
         {dislike}
-      </button>
+      </button> */}
     </div>
   );
 }
