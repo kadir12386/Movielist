@@ -25,6 +25,12 @@
   align-items: center;
   justify-content: space-between;
 }
+.movie-info-specs {
+  padding: 10px 10px;
+}
+.movie-info-section {
+  padding: 0px 20px;
+}
 .movie-name {
   font-size: 24px;
   font-family: "Raleway", sans-serif;
