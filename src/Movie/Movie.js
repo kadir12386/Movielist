@@ -10,7 +10,15 @@ import Card from "@mui/material/Card";
 
 import CardContent from "@mui/material/CardContent";
 
-export function Movie({ name, poster, rating, des, index }) {
+export function Movie({
+  name,
+  poster,
+  rating,
+  des,
+  id,
+  deleteButton,
+  editButton,
+}) {
   const [show, setShow] = useState(true);
   const history = useHistory();
   // const styles = { display: show ? "block" : "none" };
@@ -34,7 +42,7 @@ export function Movie({ name, poster, rating, des, index }) {
               <IconButton
                 aria-label="info"
                 color="primary"
-                onClick={() => history.push("/movies/" + index)}
+                onClick={() => history.push("/movies/" + id)}
               >
                 <InfoIcon />
               </IconButton>
@@ -69,6 +77,8 @@ export function Movie({ name, poster, rating, des, index }) {
           {show ? <p className="movie-summary">{des}</p> : " "}
           <Counter />
         </div>
+        {editButton}
+        {deleteButton}
       </CardContent>
     </Card>
   );

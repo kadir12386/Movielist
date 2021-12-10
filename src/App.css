@@ -43,6 +43,8 @@
   margin: 20px;
   border-radius: 10px;
   overflow: hidden;
+  height: min-content;
+
   /* border: 2px solid red; */
 }
 .movie-rating {
@@ -50,10 +52,11 @@
   color: rgb(245, 45, 10);
   font-weight: 600;
 }
-.movie-summary {
+/* .movie-summary {
   color: rgb(68, 67, 67);
-}
+} */
 .movie-list {
+  margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -81,4 +84,10 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin-top: 20px;
+  padding: 10px;
+}
+.color-container {
+  margin-top: 10px;
+  padding: 10px;
 }

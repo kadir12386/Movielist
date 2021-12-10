@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
@@ -11,6 +11,10 @@ export function Counter() {
   const [dislike, setDisLike] = useState(0);
   const incrementLike = () => setLike(like + 1);
   const incrementDislike = () => setDisLike(dislike + 1);
+
+  useEffect(() => {
+    console.log("the updated like value is", like);
+  }, [like]);
   // const like = 0;
   return (
     // <div>

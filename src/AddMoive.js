@@ -3,32 +3,46 @@ import { useHistory } from "react-router";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-export function AddMoive({ initalmovie, setMovie }) {
+export function AddMoive() {
   const [name, setName] = useState("");
-  const [poster, setPoster] = useState("");
-  const [summary, setSummary] = useState("");
+  const [pic, setPoster] = useState("");
+  const [des, setSummary] = useState("");
   const [rating, setRating] = useState("");
-  const resetMovieForm = () => {
-    setName("");
-    setPoster("");
-    setSummary("");
-    setRating("");
-  };
+  const [trailer, setTrailer] = useState("");
+  // const resetMovieForm = () => {
+  //   setName("");
+  //   setPoster("");
+  //   setSummary("");
+  //   setRating("");
+  //   setTrailer("");
+  // };
   const history = useHistory();
   const addMoive = () => {
-    console.log(name, poster, summary, rating);
-    console.log({ name, poster, summary, rating });
+    console.log(name, pic, des, rating, trailer);
+    console.log({ name, pic, des, rating, trailer });
     const newmovie = {
       name,
-      poster,
-      summary,
+      pic,
+      des,
       rating,
+      trailer,
     };
 
-    setMovie([...initalmovie, newmovie]);
-    // console.log([...initalmovie, newmovie]);
-    resetMovieForm();
-    history.push("/movies");
+    // setMovie([...initalmovie, newmovie]);
+    // // console.log([...initalmovie, newmovie]);
+    // resetMovieForm();
+    // history.push("/movies");
+
+    //adding 3 steps
+    // 1.method : post
+    //2.body - data & JSON
+    //3.header-JSON data
+
+    fetch("https://614ed775b4f6d30017b483a0.mockapi.io/movies", {
+      method: "POST",
+      body: JSON.stringify(newmovie),
+      headers: { "Content-type": "application/json" },
+    }).then(() => history.push("/movies"));
   };
   return (
     <div className="App">
@@ -44,23 +58,31 @@ export function AddMoive({ initalmovie, setMovie }) {
           id="outlined-basic"
           label="Movie Poster"
           variant="outlined"
-          value={poster}
+          value={pic}
           onChange={(event) => setPoster(event.target.value)}
         />
         <TextField
           id="outlined-basic"
-          label="Movie summary"
+          label="Movie Summary"
           variant="outlined"
-          value={summary}
+          value={des}
           onChange={(event) => setSummary(event.target.value)}
         />
 
         <TextField
           id="outlined-basic"
-          label="Movie summary"
+          label="Movie Rating"
           variant="outlined"
           value={rating}
           onChange={(event) => setRating(event.target.value)}
+        />
+
+        <TextField
+          id="outlined-basic"
+          label="Movie Trailer"
+          variant="outlined"
+          value={trailer}
+          onChange={(event) => setTrailer(event.target.value)}
         />
 
         <Button variant="contained" onClick={addMoive}>

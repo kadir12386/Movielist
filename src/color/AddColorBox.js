@@ -10,7 +10,7 @@ export function AddColorBox() {
   const styles_text = { color: color };
 
   return (
-    <div>
+    <div className="color-container">
       <input
         className="color_box"
         style={styles}
