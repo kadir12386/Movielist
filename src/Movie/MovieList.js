@@ -40,7 +40,7 @@ export function MovieList() {
   return (
     <div>
       <section className="movie-list">
-        {movie.map(({ name, pic, rating, des, id }, index) => (
+        {movie.map(({ name, pic, rating, des, id }) => (
           <Movie
             name={name}
             poster={pic}
@@ -63,7 +63,7 @@ export function MovieList() {
                 style={{ marginLeft: "auto" }}
                 aria-label="delete"
                 color="success"
-                onClick={() => history.push("/movie/edit/" + index)}
+                onClick={() => history.push("/movie/edit/" + id)}
               >
                 <EditIcon />
 

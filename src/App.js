@@ -17,12 +17,14 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 // Material import
 import { MovieDetails } from "./Movie/MovieDetails";
 import { NotFound } from "./Movie/NotFound";
 import { AddMoive } from "./AddMoive";
 import { EditMovie } from "./EditMovie";
 import { useEffect } from "react";
+import { BasicForm } from "./BasicForm";
 
 export default function App() {
   const history = useHistory();
@@ -113,6 +115,15 @@ export default function App() {
               >
                 Color-Game
               </Button>
+              <Button
+                size="large"
+                color="inherit"
+                aria-label="Color-Game"
+                startIcon={<TextSnippetIcon />}
+                onClick={() => history.push("/basic-form")}
+              >
+                Basic Form
+              </Button>
 
               <Button
                 style={{ marginLeft: "auto" }}
@@ -141,12 +152,11 @@ export default function App() {
               {/* <AddMoive initalmovie={initalmovie} setMovie={setMovie} /> */}
               <AddMoive />
             </Route>
-
+            {/* //important is mid while fetching the api for edit also give the same one */}
             <Route path="/movie/edit/:mid">
               {/* <EditMovie initalmovie={initalmovie} setMovie={setMovie} /> */}
               <EditMovie />
             </Route>
-
             <Route path="/movies/:id">
               {/* <MovieDetails movie={initalmovie} /> */}
               <MovieDetails />
@@ -162,6 +172,9 @@ export default function App() {
             <Route path="/color">
               <AddColorBox />
             </Route>
+            <Route path="/basic-form">
+              <BasicForm />
+            </Route>
             <Route path="**">
               {" "}
               <NotFound />
@@ -172,7 +185,6 @@ export default function App() {
     </ThemeProvider>
   );
 }
-
 //CRUD
 //C - Create - Post
 //R - Read - Get
