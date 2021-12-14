@@ -77,7 +77,7 @@ export default function App() {
         </li>
       </ul> */}
 
-          <AppBar position="static">
+          <AppBar position="static" color="secondary">
             <Toolbar>
               <Button
                 size="large"
